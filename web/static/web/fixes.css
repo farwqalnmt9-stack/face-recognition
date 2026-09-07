@@ -1,0 +1,2 @@
+.card-top a{height:36px;width:36px;border-radius:50%;background:#ffffff1a;color:#fff;font-size:18px;display:grid;place-items:center;transition:background .18s cubic-bezier(.2,.8,.2,1)}
+.card-top a:hover,.card-top a:focus-visible{background:#ffffff2d}

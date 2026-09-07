@@ -1,0 +1,24 @@
+html[dir="ltr"] .visual-copy,html[dir="ltr"] .login-surface,html[dir="ltr"] .marquee-card,html[dir="ltr"] .admin-view{direction:ltr}
+html[dir="ltr"] .admin-nav button{text-align:left}
+html[dir="ltr"] .demo form{text-align:left}
+html[dir="ltr"] .success-copy blockquote{border-right:0;border-left:2px solid var(--lime)}
+html[dir="ltr"] .control-copy li b{margin-left:0;margin-right:10px}
+html[dir="ltr"] .detail-copy,html[dir="ltr"] .login-card{text-align:left}
+
+.control-access,.core-admin-access{display:inline-flex;align-items:center;justify-content:center;min-height:38px;padding:0 13px;border:1px solid color-mix(in srgb,var(--ink,#111) 18%,transparent);border-radius:999px;font-size:12px;font-weight:800;white-space:nowrap;transition:background .25s,border-color .25s,color .25s,transform .25s}
+.control-access{background:var(--lime,#67d331);border-color:var(--lime,#67d331);color:#071108!important}
+.core-admin-access{background:transparent;color:inherit!important}
+.control-access:hover,.core-admin-access:hover{transform:translateY(-2px)}
+.core-admin-access:hover{border-color:var(--lime,#67d331);color:var(--lime,#67d331)!important}
+.product-grid .product-card{background:linear-gradient(145deg,#102018,color-mix(in srgb,var(--card-accent,#1ca84b) 58%,#102018))}
+html.theme-dark .core-admin-access{border-color:rgba(255,255,255,.22)}
+@media(max-width:1200px){.core-admin-access{display:none}}
+@media(max-width:900px){.control-access{min-height:34px;padding:0 10px;font-size:11px}.nav-actions .button-small{display:none}}
+@media(max-width:800px){.nav-actions .admin-link{display:inline-flex;align-items:center;min-height:34px;font-size:11px;padding:0 10px}}
+@media(max-width:620px){.control-access{width:38px;padding:0;font-size:0}.control-access:before{content:"K";font-size:14px;font-weight:900}}
+
+.form-success{display:block;background:#e7f7e9;color:#176b38;border:1px solid #b9e4c0;padding:8px 10px;border-radius:8px;font-size:11px;margin:10px 0}
+.auth-switch{text-align:center!important;font-size:12px!important;margin:18px 0 0!important;color:#5d685f}.auth-switch a{color:#197f40;font-weight:800;text-decoration:underline;text-underline-offset:3px}
+.signup-page{overflow:auto}.signup-page .login-card{padding-block:28px}.signup-page .login-surface{min-height:100svh}
+html.theme-dark .form-success{background:#173b23;color:#d4f7d9;border-color:#35794a}html.theme-dark .auth-switch{color:#aebbae}
+@media(max-height:760px) and (min-width:901px){.signup-page .login-visual>img{height:100%;min-height:100svh}.signup-page .login-surface{padding-block:74px}}

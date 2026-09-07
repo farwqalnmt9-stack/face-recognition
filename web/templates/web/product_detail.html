@@ -1,0 +1,27 @@
+{% load static %}
+<!doctype html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <script src="{% static 'web/theme-init.js' %}"></script>
+  <title>{{ product.name_ar }} | Kajo</title>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Arabic:wght@400;500;600;700;800&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="{% static 'web/styles.css' %}">
+  <link rel="stylesheet" href="{% static 'web/studio.css' %}">
+  <link rel="stylesheet" href="{% static 'web/themes.css' %}">
+</head>
+<body class="detail-page">
+  <div class="cursor-dot" aria-hidden="true"></div>
+  <header class="topbar page-topbar">
+    <a class="brand" href="{% url 'home' %}"><span class="brand-mark">K</span><span>kajo<span class="brand-dot">.</span></span></a>
+    <nav><a href="{% url 'home' %}" data-i18n="home">الرئيسية</a><a href="{% url 'products' %}" data-i18n="all_products">كل المنتجات</a></nav>
+    <div class="nav-actions"><button class="icon-btn" data-theme-toggle aria-label="تفعيل الوضع الداكن"><svg viewBox="0 0 24 24"><path d="M12 3v2m0 14v2M3 12h2m14 0h2M5.64 5.64l1.42 1.42m9.88 9.88 1.42 1.42m0-12.72-1.42 1.42m-9.88 9.88-1.42 1.42"/><circle cx="12" cy="12" r="4"/></svg></button><button class="lang" data-lang-toggle>EN</button><a class="control-access" href="{% url 'control_panel' %}" data-ar="لوحة التحكم" data-en="Control panel">لوحة التحكم</a><a class="core-admin-access" href="{% url 'admin:index' %}" data-ar="إدارة Django" data-en="Django admin">إدارة Django</a></div>
+  </header>
+  <main class="detail-main" style="--detail-accent:{{ product.accent }}">
+    <div class="detail-orbit"><i></i><i></i><b>K</b></div>
+    <div class="detail-copy"><span>{{ product.category }}</span><h1 data-ar="{{ product.name_ar }}" data-en="{{ product.name_en }}">{{ product.name_ar }}</h1><p data-ar="{{ product.summary_ar }}" data-en="{{ product.summary_en }}">{{ product.summary_ar }}</p><div><a class="button" href="{% url 'home' %}#demo"><span data-i18n="request_trial">اطلب تجربة مجانية</span><b>←</b></a><a class="button button-ghost" href="{% url 'products' %}" data-i18n="back_products">العودة للمنتجات</a></div></div>
+  </main>
+  <script src="{% static 'web/studio.js' %}"></script>
+</body>
+</html>

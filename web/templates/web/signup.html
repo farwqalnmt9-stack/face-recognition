@@ -1,0 +1,51 @@
+{% load static %}
+{% if login_image_url %}<style>.login-visual{background:url('{{ login_image_url }}') center/cover}.login-visual>img{opacity:0}</style>{% endif %}
+<!doctype html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <script src="{% static 'web/theme-init.js' %}"></script>
+  <title>إنشاء حساب | Kajo</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Arabic:wght@400;500;600;700;800&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="{% static 'web/styles.css' %}">
+  <link rel="stylesheet" href="{% static 'web/studio.css' %}">
+  <link rel="stylesheet" href="{% static 'web/themes.css' %}">
+</head>
+<body class="login-page signup-page">
+  <div class="cursor-dot" aria-hidden="true"></div>
+  <main class="login-shell">
+    <section class="login-visual" aria-label="Kajo engineering visual">
+      <img src="{% static 'web/assets/kajo-login.png' %}" alt="تكوين تقني تجريدي بألوان كاجو الخضراء" width="1024" height="1536">
+      <div class="visual-copy"><a class="brand" href="{% url 'home' %}"><span class="brand-mark">K</span><span>kajo<span class="brand-dot">.</span></span></a><div><span class="visual-number">02 / 03</span><h2><span data-ar="ابدأ رحلتك." data-en="Start your journey.">ابدأ رحلتك.</span><br><em data-ar="بكل وضوح." data-en="With clarity.">بكل وضوح.</em></h2><p data-ar="أنشئ حسابك للوصول إلى خدمات كاجو ومتابعة طلباتك." data-en="Create an account to access Kajo services and follow your requests.">أنشئ حسابك للوصول إلى خدمات كاجو ومتابعة طلباتك.</p></div></div>
+    </section>
+    <section class="login-surface">
+      <div class="login-tools"><button class="lang" data-lang-toggle>EN</button><a href="{% url 'home' %}" aria-label="العودة للرئيسية"><svg viewBox="0 0 24 24"><path d="m15 18-6-6 6-6"/></svg></a></div>
+      <div class="ring-field" aria-hidden="true"><i class="half-ring ring-one"></i><i class="half-ring ring-two"></i><i class="half-ring ring-three"></i></div>
+      <div class="login-stack"><div class="support-card back-one"></div><div class="support-card back-two"></div><article class="login-card signup-card">
+        <span class="login-kicker">KAJO ACCOUNT</span>
+        <h1 data-ar="أنشئ حسابك" data-en="Create your account">أنشئ حسابك</h1>
+        <p data-ar="بيانات بسيطة للبدء، ويمكنك تسجيل الدخول مباشرة بعد إنشاء الحساب." data-en="A few details to get started. You can sign in right after creating your account.">بيانات بسيطة للبدء، ويمكنك تسجيل الدخول مباشرة بعد إنشاء الحساب.</p>
+        {% if form.non_field_errors %}<div class="form-error" role="alert">{% for error in form.non_field_errors %}{{ error }}{% endfor %}</div>{% endif %}
+        <form method="post" novalidate>{% csrf_token %}
+          <label for="id_username" data-ar="اسم المستخدم" data-en="Username">اسم المستخدم</label>
+          <div class="field-wrap"><svg aria-hidden="true" viewBox="0 0 24 24"><path d="M20 21a8 8 0 0 0-16 0m12-13a4 4 0 1 1-8 0 4 4 0 0 1 8 0Z"/></svg>{{ form.username }}</div>
+          {% if form.username.errors %}<small class="field-error" role="alert">{{ form.username.errors.0 }}</small>{% endif %}
+          <label for="id_password1" data-ar="كلمة المرور" data-en="Password">كلمة المرور</label>
+          <div class="field-wrap"><svg aria-hidden="true" viewBox="0 0 24 24"><rect x="5" y="10" width="14" height="11" rx="2"/><path d="M8 10V7a4 4 0 0 1 8 0v3"/></svg>{{ form.password1 }}<button class="password-toggle" type="button" data-password-target="id_password1" aria-label="إظهار كلمة المرور"><svg viewBox="0 0 24 24"><path d="M2 12s3.5-6 10-6 10 6 10 6-3.5 6-10 6S2 12 2 12Z"/><circle cx="12" cy="12" r="2.5"/></svg></button></div>
+          {% if form.password1.errors %}<small class="field-error" role="alert">{{ form.password1.errors.0 }}</small>{% endif %}
+          <label for="id_password2" data-ar="تأكيد كلمة المرور" data-en="Confirm password">تأكيد كلمة المرور</label>
+          <div class="field-wrap"><svg aria-hidden="true" viewBox="0 0 24 24"><rect x="5" y="10" width="14" height="11" rx="2"/><path d="M8 10V7a4 4 0 0 1 8 0v3"/></svg>{{ form.password2 }}<button class="password-toggle" type="button" data-password-target="id_password2" aria-label="إظهار كلمة المرور"><svg viewBox="0 0 24 24"><path d="M2 12s3.5-6 10-6 10 6 10 6-3.5 6-10 6S2 12 2 12Z"/><circle cx="12" cy="12" r="2.5"/></svg></button></div>
+          {% if form.password2.errors %}<small class="field-error" role="alert">{{ form.password2.errors.0 }}</small>{% endif %}
+          <button class="button login-submit" type="submit"><span data-ar="إنشاء الحساب" data-en="Create account">إنشاء الحساب</span><b aria-hidden="true">←</b></button>
+        </form>
+        <p class="auth-switch"><span data-ar="لديك حساب بالفعل؟" data-en="Already have an account?">لديك حساب بالفعل؟</span> <a href="{% url 'login' %}" data-ar="تسجيل الدخول" data-en="Sign in">تسجيل الدخول</a></p>
+      </article></div>
+    </section>
+  </main>
+  <script src="{% static 'web/studio.js' %}"></script>
+  <script>document.querySelectorAll('[data-password-target]').forEach(function(button){button.addEventListener('click',function(){var input=document.getElementById(button.dataset.passwordTarget);input.type=input.type==='password'?'text':'password';button.setAttribute('aria-label',input.type==='password'?'إظهار كلمة المرور':'إخفاء كلمة المرور')})});(function(){var syncTitle=function(){document.title=document.documentElement.lang==='en'?'Create account | Kajo':'إنشاء حساب | Kajo'};syncTitle();document.querySelector('[data-lang-toggle]').addEventListener('click',function(){setTimeout(syncTitle)})})()</script>
+</body>
+</html>
