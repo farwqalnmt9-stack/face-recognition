@@ -1,0 +1,12 @@
+{% extends "web/control_base.html" %}
+{% block page_title %}{{ resource.label }} | كاجو{% endblock %}
+{% block kicker %}إدارة البيانات{% endblock %}
+{% block heading %}{{ resource.label }}{% endblock %}
+{% block header_action %}<a class="primary-control" href="{% url 'control_resource_create' resource_key %}">إضافة {{ resource.singular }}</a>{% endblock %}
+{% block content %}
+<section class="resource-card">
+  <div class="resource-toolbar"><form class="control-search" method="get" role="search"><label for="resourceSearch">ابحث ضمن {{ resource.label }}</label><div><input id="resourceSearch" name="q" value="{{ query }}" type="search" placeholder="اكتب كلمة البحث"><button type="submit">بحث</button>{% if query %}<a href="{% url 'control_resource_list' resource_key %}">مسح</a>{% endif %}</div></form><span>{{ page.paginator.count }} سجل</span></div>
+  {% if rows %}<div class="resource-table-wrap"><table class="resource-table"><thead><tr>{% for field, label in resource.columns %}<th scope="col">{{ label }}</th>{% endfor %}<th scope="col">الإجراءات</th></tr></thead><tbody>{% for row in rows %}<tr>{% for cell in row.values %}<td>{% if cell.is_boolean %}<span class="state-pill {% if cell.truthy %}positive{% else %}muted{% endif %}">{{ cell.value }}</span>{% else %}{{ cell.value }}{% endif %}</td>{% endfor %}<td class="row-actions"><a href="{% url 'control_resource_edit' resource_key row.instance.pk %}">تعديل</a><a class="danger-link" href="{% url 'control_resource_delete' resource_key row.instance.pk %}">حذف</a></td></tr>{% endfor %}</tbody></table></div>{% else %}<div class="resource-empty"><b>لا توجد نتائج</b><p>{% if query %}جرّب كلمة بحث أخرى أو امسح البحث.{% else %}ابدأ بإضافة أول سجل في هذا القسم.{% endif %}</p></div>{% endif %}
+  {% if page.paginator.num_pages > 1 %}<nav class="pagination" aria-label="صفحات النتائج">{% if page.has_previous %}<a href="?q={{ query|urlencode }}&page={{ page.previous_page_number }}">السابق</a>{% endif %}<span>صفحة {{ page.number }} من {{ page.paginator.num_pages }}</span>{% if page.has_next %}<a href="?q={{ query|urlencode }}&page={{ page.next_page_number }}">التالي</a>{% endif %}</nav>{% endif %}
+</section>
+{% endblock %}

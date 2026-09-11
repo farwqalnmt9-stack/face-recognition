@@ -1,0 +1,11 @@
+{% extends "web/control_base.html" %}
+{% block page_title %}{% if is_create %}إضافة{% else %}تعديل{% endif %} {{ resource.singular }} | كاجو{% endblock %}
+{% block kicker %}<a class="control-back" href="{% url 'control_resource_list' resource_key %}">{{ resource.label }}</a>{% endblock %}
+{% block heading %}{% if is_create %}إضافة {{ resource.singular }}{% else %}تعديل «{{ instance }}»{% endif %}{% endblock %}
+{% block content %}
+<section class="resource-form-card"><form method="post" enctype="multipart/form-data" novalidate>{% csrf_token %}
+  {% if form.non_field_errors %}<div class="form-summary" role="alert">{{ form.non_field_errors }}</div>{% endif %}
+  <div class="resource-form-grid">{% for field in form %}<div class="control-field {% if field.field.widget.input_type == 'checkbox' %}checkbox-field{% endif %} {% if field.field.widget.input_type == 'textarea' %}wide-field{% endif %}">{% if field.field.widget.input_type == 'checkbox' %}<label>{{ field }}<span>{{ field.label }}</span></label>{% else %}<label for="{{ field.id_for_label }}">{{ field.label }}{% if field.field.required %}<b aria-hidden="true">*</b>{% endif %}</label>{{ field }}{% endif %}{% if field.help_text %}<small>{{ field.help_text|safe }}</small>{% endif %}{% for error in field.errors %}<p class="field-error" role="alert">{{ error }}</p>{% endfor %}</div>{% endfor %}</div>
+  <div class="form-actions"><button class="save-control" type="submit">حفظ التغييرات</button><a href="{% url 'control_resource_list' resource_key %}">إلغاء</a>{% if not is_create %}<a class="danger-link push-end" href="{% url 'control_resource_delete' resource_key instance.pk %}">حذف السجل</a>{% endif %}</div>
+</form></section>
+{% endblock %}

@@ -1,2 +1,19 @@
 .card-top a{height:36px;width:36px;border-radius:50%;background:#ffffff1a;color:#fff;font-size:18px;display:grid;place-items:center;transition:background .18s cubic-bezier(.2,.8,.2,1)}
 .card-top a:hover,.card-top a:focus-visible{background:#ffffff2d}
+
+/* Keep the eyebrow rule on its decorative line only, never on its text label. */
+.eyebrow>span:first-child{
+  flex:0 0 22px;
+  width:22px;
+  height:2px;
+  background:var(--lime);
+}
+.eyebrow>span:last-child{
+  width:auto;
+  height:auto;
+  min-width:0;
+  background:transparent;
+  white-space:nowrap;
+}
+.eyebrow.green>span:first-child{background:var(--green)}
+.partners .eyebrow>span:first-child{background:#23412c}

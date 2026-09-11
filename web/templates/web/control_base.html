@@ -1,0 +1,41 @@
+{% load static %}
+<!doctype html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <script>(()=>{try{const t=localStorage.getItem('kajo-theme')||'light';document.documentElement.classList.toggle('theme-dark',t==='dark');document.documentElement.dataset.theme=t}catch(_){}})()</script>
+  <title>{% block page_title %}لوحة تحكم كاجو{% endblock %}</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Arabic:wght@400;500;600;700;800&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="{% static 'web/styles.css' %}">
+  <link rel="stylesheet" href="{% static 'web/studio.css' %}">
+  <link rel="stylesheet" href="{% static 'web/themes.css' %}">
+  <link rel="stylesheet" href="{% static 'web/control-panel.css' %}">
+  <link rel="stylesheet" href="{% static 'web/control-crud.css' %}">
+</head>
+<body class="real-control">
+  <div class="cursor-dot" aria-hidden="true"></div>
+  <aside class="control-sidebar">
+    <a class="brand" href="{% url 'home' %}" aria-label="العودة إلى موقع كاجو"><span class="brand-mark">K</span><span>kajo<span class="brand-dot">.</span></span></a>
+    <div class="control-account"><span>{{ request.user.username|slice:":2"|upper }}</span><div><b>{{ request.user.get_full_name|default:request.user.username }}</b><small>مدير المنصة</small></div></div>
+    <nav aria-label="أقسام لوحة التحكم">
+      <a class="{% if active_resource == 'dashboard' %}active{% endif %}" href="{% url 'control_panel' %}"><span>00</span><b>نظرة عامة</b></a>
+      {% for item in control_resources %}<a class="{% if active_resource == item.key %}active{% endif %}" href="{% url 'control_resource_list' item.key %}"><span>{{ item.index }}</span><b>{{ item.label }}</b><small>{{ item.count }}</small></a>{% endfor %}
+    </nav>
+  </aside>
+  <main class="control-main">
+    <header class="control-page-header">
+      <div><p>{% block kicker %}مركز إدارة المنصة{% endblock %}</p><h1>{% block heading %}لوحة التحكم{% endblock %}</h1></div>
+      <div class="control-tools">
+        <button class="icon-btn" type="button" data-theme-toggle aria-label="تفعيل الوضع الداكن"><svg viewBox="0 0 24 24"><path d="M12 3v2m0 14v2M3 12h2m14 0h2M5.64 5.64l1.42 1.42m9.88 9.88 1.42 1.42m0-12.72-1.42 1.42m-9.88 9.88-1.42 1.42"/><circle cx="12" cy="12" r="4"/></svg></button>
+        <a href="{% url 'home' %}">عرض الموقع</a>{% block header_action %}{% endblock %}
+      </div>
+    </header>
+    {% if messages %}<div class="control-messages" role="status">{% for message in messages %}<p class="{{ message.tags }}">{{ message }}</p>{% endfor %}</div>{% endif %}
+    {% block content %}{% endblock %}
+  </main>
+  <script src="{% static 'web/control.js' %}"></script>
+</body>
+</html>

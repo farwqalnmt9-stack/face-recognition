@@ -1,0 +1,5 @@
+{% extends "web/control_base.html" %}
+{% block page_title %}حذف {{ resource.singular }} | كاجو{% endblock %}
+{% block kicker %}<a class="control-back" href="{% url 'control_resource_list' resource_key %}">{{ resource.label }}</a>{% endblock %}
+{% block heading %}تأكيد الحذف{% endblock %}
+{% block content %}<section class="delete-card"><span>حذف نهائي</span><h2>هل تريد حذف «{{ instance }}»؟</h2><p>لن يظهر السجل في لوحة التحكم أو الموقع بعد الحذف. إذا كان مرتبطاً بسجلات محمية فسيتم منع العملية.</p><form method="post">{% csrf_token %}<button type="submit">نعم، احذف السجل</button><a href="{% url 'control_resource_edit' resource_key instance.pk %}">إلغاء والعودة</a></form></section>{% endblock %}

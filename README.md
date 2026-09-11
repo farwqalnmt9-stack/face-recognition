@@ -35,4 +35,12 @@ python manage.py createsuperuser
 - `web/templates/web/`: واجهة الموقع.
 - `web/static/web/`: الستايل والتفاعل والوسائط.
 
-قبل النشر الإنتاجي: انقل `SECRET_KEY` إلى متغيرات البيئة، اضبط `ALLOWED_HOSTS`، وانتقل إلى PostgreSQL وCloudflare R2/S3 للوسائط.
+قبل النشر الإنتاجي اضبط المتغيرات التالية (تُفعّل إعدادات HTTPS والكوكيز الآمنة تلقائياً عند تعطيل وضع التطوير):
+
+```powershell
+$env:DJANGO_DEBUG = "false"
+$env:DJANGO_SECRET_KEY = "a-long-random-production-secret"
+$env:DJANGO_ALLOWED_HOSTS = "example.com,www.example.com"
+```
+
+ثم انتقل إلى PostgreSQL وCloudflare R2/S3 للوسائط حسب بيئة الاستضافة.
